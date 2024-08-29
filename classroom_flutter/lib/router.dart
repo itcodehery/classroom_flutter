@@ -1,4 +1,5 @@
 import 'package:classroom_flutter/features/authentication/presentation/providers/auth_provider.dart';
+import 'package:classroom_flutter/features/classroom/presentation/screen/CreateClassPage.dart';
 import 'package:classroom_flutter/features/classroom/presentation/screen/HomePage.dart';
 import 'package:classroom_flutter/features/authentication/presentation/screens/LoginPage.dart';
 import 'package:classroom_flutter/features/classroom/presentation/screen/JoinClassPage.dart';
@@ -30,6 +31,11 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         path: '/join',
         name: 'join',
         builder: (context, state) => const JoinClassPage(),
+      ),
+      GoRoute(
+        path: '/create',
+        name: 'create',
+        builder: (context, state) => const CreateClassPage(),
       ),
     ],
     errorBuilder: (context, state) => const ErrorScreen(),

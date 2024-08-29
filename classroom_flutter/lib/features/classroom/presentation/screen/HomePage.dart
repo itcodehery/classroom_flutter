@@ -31,7 +31,9 @@ class HomePage extends ConsumerWidget {
                   ),
                   ListTile(
                     title: const Text("Create Class"),
-                    onTap: () {},
+                    onTap: () {
+                      context.push('/create');
+                    },
                   )
                 ],
               );
@@ -67,6 +69,14 @@ class HomePage extends ConsumerWidget {
               onTap: () {
                 // navigate to home
               },
+            ),
+            const Divider(),
+            const Padding(
+              padding: EdgeInsets.all(12.0),
+              child: Text(
+                "PROFILE",
+                style: TextStyle(fontSize: 14, letterSpacing: 1),
+              ),
             ),
             ListTile(
               title: const Text('Profile'),
