@@ -1,3 +1,4 @@
+import 'package:classroom_flutter/core/utils/validators.dart';
 import 'package:classroom_flutter/features/authentication/presentation/providers/auth_notifier.dart';
 import 'package:classroom_flutter/features/authentication/presentation/providers/auth_provider.dart';
 import 'package:classroom_flutter/router.dart';
@@ -12,6 +13,7 @@ class JoinClassPage extends StatefulWidget {
 }
 
 class _JoinClassPageState extends State<JoinClassPage> {
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     TextEditingController controller = TextEditingController();
@@ -25,11 +27,11 @@ class _JoinClassPageState extends State<JoinClassPage> {
                   shape: WidgetStatePropertyAll(RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ))),
-              onPressed: controller.text.isEmpty
-                  ? null
-                  : () {
-                      // Join class
-                    },
+              onPressed: () {
+                if (formKey.currentState!.validate()) {
+                  // Join class
+                }
+              },
               child: const Text("Join")),
           IconButton(
               onPressed: () {}, icon: const Icon(Icons.more_vert_outlined)),
@@ -62,14 +64,26 @@ class _JoinClassPageState extends State<JoinClassPage> {
                 const Text(
                     "Ask your teacher for the class code, then enter it here."),
                 const SizedBox(height: 10),
-                TextFormField(
-                  onFieldSubmitted: (value) {
-                    if (value.isNotEmpty) {}
-                  },
-                  controller: controller,
-                  decoration: const InputDecoration(
-                    hintText: "Enter class code",
-                    border: OutlineInputBorder(),
+                Form(
+                  key: formKey,
+                  child: TextFormField(
+                    onFieldSubmitted: (value) {
+                      if (value.isNotEmpty) {}
+                    },
+                    controller: controller,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Please enter a class code";
+                      }
+                      if (!Validators().isValidClassCode(value)) {
+                        return "Invalid class code. A class code is usually 6 characters long";
+                      }
+                      return null;
+                    },
+                    decoration: const InputDecoration(
+                      hintText: "Enter class code",
+                      border: OutlineInputBorder(),
+                    ),
                   ),
                 ),
               ],
