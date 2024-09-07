@@ -1,3 +1,5 @@
+## Project has been ABANDONDED
+
 # classroom_flutter
 
 A Google Classroom Clone made using Flutter and Firebase.
